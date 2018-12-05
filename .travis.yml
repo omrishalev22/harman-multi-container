@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -f ./client/Dockerfile.dev -t client ./client
+
+script:
+  - docker run client npm test -- --coverage
+
+after_success:
+  - docker build -t multi/client ./client
+  - docker build -t multi/nginx ./nginx
+  - docker build -t multi/server ./server
+  - docker build -t multi/worker ./worker
+  - docker login echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push multi/client
+  - docker push multi/nginx
+  - docker push multi/server
+  - docker push multi/worker
