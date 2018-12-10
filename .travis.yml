@@ -19,3 +19,16 @@ after_success:
   - docker push omrikoss/nginx:latest
   - docker push omrikoss/server:latest
   - docker push omrikoss/worker:latest
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: harman-multi-container
+  env: HarmanMultiContainer-env
+  bucket_name: elasticbeanstalk-us-east-2-243330637950
+  bucket_path: harman-multi-container
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
