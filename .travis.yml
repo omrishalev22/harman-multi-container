@@ -9,10 +9,10 @@ script:
   - docker run omrikoss/client npm test -- --coverage
 
 after_success:
-  - docker build -t multi/client ./client
-  - docker build -t multi/nginx ./nginx
-  - docker build -t multi/server ./server
-  - docker build -t multi/worker ./worker
+  - docker build -t omrikoss/client ./client
+  - docker build -t omrikoss/nginx ./nginx
+  - docker build -t omrikoss/server ./server
+  - docker build -t omrikoss/worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker images
   - docker push omrikoss/client:latest
