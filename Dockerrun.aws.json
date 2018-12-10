@@ -6,7 +6,7 @@
       "image": "omrikoss/client:latest",
       "hostname": "client",
       "essential": false,
-      "memory": 128
+      "memory": 300
     },
     {
       "name": "server",
