@@ -32,7 +32,7 @@ function fib(teamMemberName) {
         case 'oleg' :
             return '- צועק בטון שלדעתו נחמד - חברים אני סיימתי פי איצ די שאתם כתבתם "שלום עולם" בפעם הראשונה';
         default:
-            return 'blat';
+            return 'No permissions, go to devops';
     }
 }
 
