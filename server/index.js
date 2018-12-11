@@ -29,6 +29,8 @@ const redis = require('redis');
 
 console.log('keys.redisHost',keys.redisHost)
 console.log('keys.redisPort',keys.redisPort)
+console.log('keys',keys)
+console.log('keys',keys.pgHost)
 const redisClient = redis.createClient({
   host: keys.redisHost,
   port: keys.redisPort,
