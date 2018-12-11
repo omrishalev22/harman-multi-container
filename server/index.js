@@ -21,16 +21,12 @@ const pgClient = new Pool({
 pgClient.on('error', () => console.log('Lost PG connection'));
 
 pgClient
-  .query('CREATE TABLE IF NOT EXISTS values (number INT)')
+  .query('CREATE TABLE IF NOT EXISTS TEAM_NAMES (name TEXT )')
   .catch(err => console.log(err));
 
 // Redis Client Setup
 const redis = require('redis');
 
-console.log('keys.redisHost',keys.redisHost)
-console.log('keys.redisPort',keys.redisPort)
-console.log('keys',keys)
-console.log('keys',keys.pgHost)
 const redisClient = redis.createClient({
   host: keys.redisHost,
   port: keys.redisPort,
@@ -40,18 +36,19 @@ const redisPublisher = redisClient.duplicate();
 
 // Express route handlers
 
-app.get('/', (req, res) => {
-  res.send('Hi');
+app.get('/delete', async (req, res) => {
+    await pgClient.query('DELETE FROM TEAM_NAMES');
+    redisClient.flushdb();
+    res.send('all values were deleted');
 });
 
-app.get('/values/all', async (req, res) => {
-  const values = await pgClient.query('SELECT * from values');
 
+app.get('/values/all', async (req, res) => {
+  const values = await pgClient.query('SELECT * from TEAM_NAMES ');
   res.send(values.rows);
 });
 
 app.get('/values/current', async (req, res) => {
-    console.log('inside values current');
   redisClient.hgetall('values', (err, values) => {
       if(err) res.send(err);
     res.send(values);
@@ -67,8 +64,7 @@ app.post('/values', async (req, res) => {
 
   redisClient.hset('values', index, 'Nothing yet!');
   redisPublisher.publish('insert', index);
-  pgClient.query('INSERT INTO values(number) VALUES($1)', [index]);
-
+  pgClient.query('INSERT INTO TEAM_NAMES(name) VALUES($1)', [index]);
   res.send({ working: true });
 });
 

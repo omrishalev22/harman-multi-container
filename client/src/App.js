@@ -13,8 +13,8 @@ class App extends Component {
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to React</h1>
-            <Link to="/">Home</Link>
-            <Link to="/otherpage">Other Page</Link>
+            <Link className="nav-bar" to="/">Home</Link>
+            <Link className="nav-bar" to="/otherpage">Other Page</Link>
           </header>
           <div>
             <Route exact path="/" component={Fib} />
