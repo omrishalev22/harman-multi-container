@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-client
+  labels:
+    component: web
+spec:
+  containers:
+  - name: node-client
+    image: omrikoss/client # we can change image here e.g worker
+    ports:
+    - containerPort: 3000

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+spec: # from here on, we are going to specify every container which will live in this deployment object
+  replicas: 1 # number of pods to create
+  selector: #
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: client
+          image: omrikoss/client
+          ports:
+            - containerPort: 3000
+
