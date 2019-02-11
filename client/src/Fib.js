@@ -71,7 +71,7 @@ class Fib extends Component {
       <div>
         <div>
           <p>Examples for searches:</p>
-          <p className="examples">omri, ido ,raz , anat , matthew , ron ,guyw , guys , yafit , oleg</p>
+          <p className="examples">omri, ido ,raz , anat , matthew , ron ,guyw , guys , yafit</p>
         </div>
 
         <form onSubmit={this.handleSubmit}>

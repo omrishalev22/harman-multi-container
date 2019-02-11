@@ -29,8 +29,6 @@ function fib(teamMemberName) {
             return 'מאז שאני אוכל לה סלטה יש לי כאבי בטן .. מזמין לה סלטה';
         case 'guys' :
             return '-10:30 בדיוק- אין דילי?';
-        case 'oleg' :
-            return '- צועק בטון שלדעתו נחמד - חברים אני סיימתי פי איצ די שאתם כתבתם "שלום עולם" בפעם הראשונה';
         default:
             return 'No permissions, go to devops';
     }
